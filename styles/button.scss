@@ -1,0 +1,130 @@
+// @import "../../../../styles/common.scss";
+@use "sass:color";
+@use "sass:map";
+
+@use "./design/index.scss" as *;
+
+$button: () !default;
+$button: map.merge(
+  (
+    color: get-css-var("content-color-base"),
+    color-hover: get-css-var("color-primary-light-2"),
+    color-focus: get-css-var("color-primary-light-2"),
+    color-active: get-css-var("color-primary-dark-1"),
+    color-disabled: get-css-var("content-color-disabled"),
+    bg-color: get-css-var("fill-color-base"),
+    bg-color-hover: get-css-var("button-bg-color"),
+    bg-color-focus: get-css-var("button-bg-color"),
+    bg-color-active: get-css-var("button-bg-color"),
+    bg-color-disabled: get-css-var("fill-color-background"),
+    b-color: get-css-var("border-color-base"),
+    b-color-hover: get-css-var("color-primary-light-2"),
+    b-color-focus: get-css-var("color-primary-light-2"),
+    b-color-active: get-css-var("color-primary-dark-1"),
+    b-color-disabled: get-css-var("border-color-light-1"),
+    color-ghost: rgba(#fff, 0.8),
+    color-hover-ghost: get-css-var("color-primary-base"),
+    color-focus-ghost: get-css-var("color-primary-base"),
+    color-active-ghost: get-css-var("color-primary-base"),
+    color-disabled-ghost: get-css-var("content-color-disabled"),
+    bg-color-ghost: transparent,
+    bg-color-hover-ghost: get-css-var("button-bg-color-ghost"),
+    bg-color-focus-ghost: get-css-var("button-bg-color-ghost"),
+    bg-color-active-ghost: get-css-var("button-bg-color-ghost"),
+    bg-color-disabled-ghost: get-css-var("button-bg-color-ghost"),
+    b-color-ghost: rgba(#fff, 0.6),
+    b-color-hover-ghost: get-css-var("color-primary-base"),
+    b-color-active-ghost: get-css-var("color-primary-base"),
+    b-color-disabled-ghost: get-css-var("content-color-disabled"),
+    color-typed: get-css-var("color-white"),
+    color-hover-typed: get-css-var("button-color-typed"),
+    color-focus-typed: get-css-var("button-color-typed"),
+    color-active-typed: get-css-var("button-color-typed"),
+    color-disabled-typed: get-css-var("content-color-disabled"),
+    bg-color-disabled-typed: get-css-var("fill-color-background"),
+    b-color-disabled-typed: get-css-var("border-color-light-1"),
+    color-focus-typed-simple: get-css-var("color-white"),
+    color-active-typed-simple: get-css-var("color-white"),
+    color-disabled-typed-simple: get-css-var("content-color-disabled"),
+    bg-color-disabled-typed-simple: get-css-var("fill-color-background"),
+    b-color-disabled-typed-simple: get-css-var("border-color-light-1"),
+    color-disabled-typed-ghost: get-css-var("button-color-disabled-ghost"),
+    bg-color-typed-ghost: transparent,
+    bg-color-hover-typed-ghost: rgba($color-white, 0.1),
+    bg-color-focus-typed-ghost: rgba($color-white, 0.1),
+    bg-color-active-typed-ghost: rgba($color-white, 0.2),
+    bg-color-disabled-typed-ghost: get-css-var("button-bg-color-typed-ghost"),
+    b-color-disabled-typed-ghost: get-css-var("content-color-disabled"),
+    border: get-css-var("border-shape") get-css-var("button-b-color"),
+    radius: get-css-var("radius-base"),
+    pulse-s-color: get-css-var("color-primary-base"),
+    pulse-opacity: 60%,
+    pulse-size: 6px,
+    pulse-duration: 800ms,
+    pulse-timing: ease,
+    height: 32px,
+    v-padding: 0,
+    h-padding: 14px,
+    font-size: get-css-var("font-size-base"),
+    series-span: 8px,
+    icon-span: 6px,
+    d-color-typed: rgba($color-white, 50%),
+  ),
+  $button
+);
+
+.#{$namespace}-button {
+  &-vars {
+    @include define-preset-values("button", $button);
+  }
+
+  cursor: pointer;
+  padding: 5px 15px;
+  background-color: $ct-fill-color-blank;
+  border: $border-default;
+  border-radius: 4px;
+  user-select: none;
+  transition: border 0.3s, color 0.3s;
+  color: $color-default-light;
+  // ---------------------------
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: get-css-var("button-height");
+  padding: get-css-var("button-v-padding") get-css-var("button-h-padding");
+  font-weight: 400;
+  line-height: 1;
+  color: get-css-var("button-color");
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  background-color: get-css-var("button-bg-color");
+  border: get-css-var("button-border");
+  border-radius: get-css-var("button-radius");
+  outline: 0;
+  transition: get-css-var("transition-color"),
+    get-css-var("transition-background"), get-css-var("transition-border"),
+    get-css-var("transition-shadow");
+
+  &:hover {
+    color: get-css-var("button-color-hover");
+    background-color: get-css-var("button-bg-color-hover");
+    border-color: get-css-var("button-b-color-hover");
+    outline: 0;
+  }
+
+  &:focus {
+    color: get-css-var("button-color-focus");
+    background-color: get-css-var("button-bg-color-focus");
+    border-color: get-css-var("button-b-color-focus");
+    outline: 0;
+  }
+
+  &:active {
+    color: get-css-var("button-color-active");
+    background-color: get-css-var("button-bg-color-active");
+    border-color: get-css-var("button-b-color-active");
+  }
+}
