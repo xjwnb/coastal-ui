@@ -127,4 +127,63 @@ $button: map.merge(
     background-color: get-css-var("button-bg-color-active");
     border-color: get-css-var("button-b-color-active");
   }
+
+  // &::after{
+  //   content: '';
+  //   position: absolute;
+  //   inset: 0;
+  //   border-radius: inherit;
+  //   opacity: 0.4;
+  //   transition: .3s;
+  // }
+
+  &#{-active} {
+    box-shadow: 0 0 0 6px get-css-var("button-color");
+    // opacity: 0;
+  }
+
+  @mixin define-button-style($style-map) {
+    @include define-preset-values("button", $style-map);
+  }
+
+  @each $type in $types {
+    @at-root {
+      &-#{$type} {
+        @include define-button-style(
+          (
+            // color: "button-color-typed",
+            color: get-css-var("color-white"),
+            // color-hover: "button-color-hover-typed",
+            // color-focus: "button-color-focus-typed",
+            // color-active: "button-color-active-typed",
+            color-hover: get-css-var("color-white"),
+            color-focus: get-css-var("color-white"),
+            color-active: get-css-var("color-white"),
+            color-disabled: "button-color-disabled-typed",
+            // bg-color: "color" $type "base",
+            // bg-color-hover: "color" $type "light-2",
+            // bg-color-focus: "color" $type "light-2",
+            // bg-color-active: "color" $type "dark-1",
+            bg-color: get-css-var("color-#{$type}-light-2"),
+            bg-color-hover: get-css-var("color-#{$type}-light-2"),
+            bg-color-focus: get-css-var("color-#{$type}-light-2"),
+            bg-color-active: get-css-var("color-#{$type}-dark-1"),
+            // bg-color-disabled: "button-bg-color-disabled-typed",
+            // b-color: "color" $type "base",
+            b-color: get-css-var("color-#{$type}-light-2"),
+            // b-color-hover: "color" $type "light-2",
+            // b-color-focus: "color" $type "light-2",
+            // b-color-active: "color" $type "dark-1",
+            b-color-hover: get-css-var("color-#{$type}-light-2"),
+            b-color-focus: get-css-var("color-#{$type}-light-2"),
+            b-color-active: get-css-var("color-#{$type}-dark-1"),
+            // b-color-disabled: "button-b-color-disabled-typed",
+            // pulse-s-color: "color" $type "dark-1"
+            border: get-css-var("border-shape") get-css-var("button-b-color"),
+
+          )
+        );
+      }
+    }
+  }
 }

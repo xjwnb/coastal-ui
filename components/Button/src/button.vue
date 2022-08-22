@@ -22,6 +22,8 @@ const className = computed(() => {
   return [cls.mainName, cls.m("vars"), cls.m(_props.type)];
 });
 
+const classNameArr = reactive([...className.value]);
+
 const buttonRef = ref<any>();
 
 onMounted(() => {
@@ -29,6 +31,14 @@ onMounted(() => {
   // buttonRef.value
   buttonRef.value?.addEventListener("mouseup", () => {
     console.log("点击弹起");
+    console.log(classNameArr);
+    classNameArr.indexOf("ct-button-active") === -1 &&
+      classNameArr.push("ct-button-active");
+    setTimeout(() => {
+      // classNameArr = classNameArr.filter(it => it !== 'ct-button-active');
+      let i = classNameArr.indexOf("ct-button-active");
+      i !== -1 && classNameArr.splice(i, 1);
+    }, 0);
   });
 });
 
@@ -44,7 +54,7 @@ console.log("reactive", obj);
 </script>
 
 <template>
-  <button ref="buttonRef" :class="className">
+  <button ref="buttonRef" :class="classNameArr">
     <span>
       <slot></slot>
     </span>

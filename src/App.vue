@@ -5,6 +5,11 @@ import Button from "../components/Button/src/button.vue";
 <template>
   <div>
     <Button>按钮</Button>
+    <Button type="primary">按钮</Button>
+    <Button type="success">按钮</Button>
+    <Button type="info">按钮</Button>
+    <Button type="warning">按钮</Button>
+    <Button type="error">按钮</Button>
   </div>
 </template>
 
