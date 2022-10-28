@@ -4,6 +4,8 @@
 
 @use "./design/index.scss" as *;
 
+$self: &;
+
 $button: () !default;
 $button: map.merge(
   (
@@ -107,6 +109,7 @@ $button: map.merge(
   transition: get-css-var("transition-color"),
     get-css-var("transition-background"), get-css-var("transition-border"),
     get-css-var("transition-shadow");
+  font-size: 14px;
 
   &:hover {
     color: get-css-var("button-color-hover");
@@ -128,6 +131,26 @@ $button: map.merge(
     border-color: get-css-var("button-b-color-active");
   }
 
+  &-large {
+    @include define-preset-values(
+      "button",
+      (
+        height: 40px,
+      )
+    );
+  }
+
+  &-small {
+    @include define-preset-values(
+      "button",
+      (
+        height: 20px,
+        h-padding: 8px,
+      )
+    );
+    font-size: 12px;
+  }
+
   // &::after{
   //   content: '';
   //   position: absolute;
@@ -137,9 +160,35 @@ $button: map.merge(
   //   transition: .3s;
   // }
 
-  &#{-active} {
-    box-shadow: 0 0 0 6px get-css-var("button-color");
-    // opacity: 0;
+  // &-#{active} {
+  //   box-shadow: 0 0 0 6px get-css-var("button-color");
+  //   // opacity: 0;
+  // }
+
+  // @at-root {
+  //   #{$self}-disabled {
+  //     &,
+  //     &:hover,
+  //     &:active,
+  //     &.active {
+  //       color: get-css-var("button-color-disabled");
+  //       cursor: not-allowed;
+  //       background-color: get-css-var("button-bg-color-disabled");
+  //       border-color: get-css-var("button-b-color-disabled");
+  //     }
+  //   }
+  // }
+
+  &-disabled {
+    &,
+    &:hover,
+    &:active,
+    &.active {
+      color: get-css-var("button-color-disabled");
+      cursor: not-allowed;
+      background-color: get-css-var("button-bg-color-disabled");
+      border-color: get-css-var("button-b-color-disabled");
+    }
   }
 
   @mixin define-button-style($style-map) {
@@ -151,39 +200,38 @@ $button: map.merge(
       &-#{$type} {
         @include define-button-style(
           (
-            // color: "button-color-typed",
             color: get-css-var("color-white"),
-            // color-hover: "button-color-hover-typed",
-            // color-focus: "button-color-focus-typed",
-            // color-active: "button-color-active-typed",
             color-hover: get-css-var("color-white"),
             color-focus: get-css-var("color-white"),
             color-active: get-css-var("color-white"),
-            color-disabled: "button-color-disabled-typed",
-            // bg-color: "color" $type "base",
-            // bg-color-hover: "color" $type "light-2",
-            // bg-color-focus: "color" $type "light-2",
-            // bg-color-active: "color" $type "dark-1",
+            color-disabled: get-css-var("color-white"),
             bg-color: get-css-var("color-#{$type}-light-2"),
             bg-color-hover: get-css-var("color-#{$type}-light-2"),
             bg-color-focus: get-css-var("color-#{$type}-light-2"),
             bg-color-active: get-css-var("color-#{$type}-dark-1"),
-            // bg-color-disabled: "button-bg-color-disabled-typed",
-            // b-color: "color" $type "base",
+            bg-color-disabled: get-css-var("color-#{$type}-opacity-5"),
             b-color: get-css-var("color-#{$type}-light-2"),
-            // b-color-hover: "color" $type "light-2",
-            // b-color-focus: "color" $type "light-2",
-            // b-color-active: "color" $type "dark-1",
             b-color-hover: get-css-var("color-#{$type}-light-2"),
             b-color-focus: get-css-var("color-#{$type}-light-2"),
             b-color-active: get-css-var("color-#{$type}-dark-1"),
-            // b-color-disabled: "button-b-color-disabled-typed",
-            // pulse-s-color: "color" $type "dark-1"
+            b-color-disabled: get-css-var("color-#{$type}-light-5"),
             border: get-css-var("border-shape") get-css-var("button-b-color"),
+          )
+        );
+      }
 
+      &-#{$type}_plain {
+        @include define-button-style(
+          (
+            color: get-css-var("color-#{$type}-dark-1"),
+            bg-color: get-css-var("color-#{$type}-light-5"),
           )
         );
       }
     }
+  }
+
+  &-round {
+    border-radius: 20px;
   }
 }

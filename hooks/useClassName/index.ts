@@ -22,7 +22,7 @@ export function useClassName(name: string): any {
   const mainName = useJoinClassString(classNamePrefix, name);
 
   const m = (str: string): string => {
-    return useJoinClassString(mainName, unref(str));
+    return str && useJoinClassString(mainName, unref(str));
   };
 
   const is = (str: string, state?: boolean | undefined) => {
@@ -33,5 +33,6 @@ export function useClassName(name: string): any {
     mainName,
     //
     m,
+    is
   };
 }

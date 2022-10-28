@@ -1,7 +1,7 @@
 <script lang="ts" setup name="Button">
 import { defineProps, computed, ref, onMounted, reactive } from "vue";
-import { TypeProps } from "../../../types/common";
-import { useClassName } from "../../../hooks";
+import { TypeProps, SizeProps } from "./symbol";
+import { useClassName } from "hooks";
 // import "./styles/button.scss";
 
 // TypeProps: "primary"  | "success" | "warning" | "danger" | "info";
@@ -9,27 +9,42 @@ import { useClassName } from "../../../hooks";
 const _props = withDefaults(
   defineProps<{
     type?: TypeProps;
+    disabled?: boolean;
+    size?: SizeProps;
+    plain?: boolean;
+    round?: boolean;
   }>(),
   {
     type: "default",
+    disabled: false,
+    size: "",
+    plain: false,
+    round: false,
   }
 );
 
+const emit = defineEmits(["click"]);
+
 const cls = useClassName("button");
-console.log(_props.type);
 
 const className = computed(() => {
-  return [cls.mainName, cls.m("vars"), cls.m(_props.type)];
+  return [
+    cls.mainName,
+    cls.m("vars"),
+    cls.m(_props.type),
+    cls.is("disabled", _props.disabled),
+    cls.m(_props.size),
+    cls.is(`${_props.type}_plain`, _props.plain),
+    cls.is(`round`, _props.round),
+  ];
 });
 
 const classNameArr = reactive([...className.value]);
 
-const buttonRef = ref<any>();
+const btnRef = ref<InstanceType<typeof HTMLButtonElement> | null>();
 
 onMounted(() => {
-  console.dir(buttonRef.value);
-  // buttonRef.value
-  buttonRef.value?.addEventListener("mouseup", () => {
+  /* btnRef.value?.addEventListener("mouseup", () => {
     console.log("点击弹起");
     console.log(classNameArr);
     classNameArr.indexOf("ct-button-active") === -1 &&
@@ -39,22 +54,25 @@ onMounted(() => {
       let i = classNameArr.indexOf("ct-button-active");
       i !== -1 && classNameArr.splice(i, 1);
     }, 0);
-  });
+  }); */
 });
 
-defineExpose(_props);
+const onClick = function (e: MouseEvent) {
+  emit("click", e);
+};
 
-const xkc = ref("小卡车");
-console.log("ref", xkc);
-
-const obj = reactive({
-  name: "小卡车",
+defineExpose({
+  ..._props,
 });
-console.log("reactive", obj);
 </script>
 
 <template>
-  <button ref="buttonRef" :class="classNameArr">
+  <button
+    ref="btnRef"
+    :disabled="_props.disabled"
+    :class="classNameArr"
+    @click="onClick"
+  >
     <span>
       <slot></slot>
     </span>

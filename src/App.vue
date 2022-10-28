@@ -10,6 +10,26 @@ import Button from "../components/Button/src/button.vue";
     <Button type="info">按钮</Button>
     <Button type="warning">按钮</Button>
     <Button type="error">按钮</Button>
+    <Button type="error" disabled>按钮</Button>
+    <Button type="primary" disabled>按钮</Button>
+    <Button type="success" disabled>按钮</Button>
+    <Button type="info" disabled>按钮</Button>
+
+    <Button size="large">Large</Button>
+    <Button>Default</Button>
+    <Button size="small">Small</Button>
+
+    <Button type="primary" plain>plan</Button>
+    <Button type="success" plain>plan</Button>
+    <Button type="info" plain>plan</Button>
+    <Button type="warning" plain>plan</Button>
+    <Button type="error" plain>plan</Button>
+
+    <Button type="success" disabled plain>plan</Button>
+
+    <Button type="success" plain round>plan</Button>
+
+    <Button type="primary">点击</Button>
   </div>
 </template>
 
